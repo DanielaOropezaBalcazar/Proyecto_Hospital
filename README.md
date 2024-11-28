@@ -19,6 +19,7 @@
 # Tecnologías utilizadas
 ## Modelado:
 ### - Vertabelo
+### - Draw.io
 ### - Dbeaber
 ## Planificación:
 ### - Trello
