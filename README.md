@@ -14,7 +14,7 @@
 ###   - c2
 
 # Base de Datos
-![BD hospital - Diagrama Relacional](https://github.com/user-attachments/assets/499a7269-2c11-42c0-81b8-db36cdc7e268)
+![BD hospital - Diagrama Relacional](https://github.com/user-attachments/assets/6896b241-8f31-454d-8b25-f0b4f1c2bb38)
 
 
 # Tecnologías utilizadas
