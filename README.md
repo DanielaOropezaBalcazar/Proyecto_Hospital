@@ -1,10 +1,10 @@
 # Proyecto_Hospital - Sistema de Gestión de pacientes, empleados y consultas para un Hospital
 
 # Integrantes
-| INTEGRANTES       |
-|---------------------|
-| OROPEZA BALCAZAR DANIELA NICOLE  |
-| ROMERO CORI JUDITH MARISOL |
+| INTEGRANTES       | PUNTUACION       |
+|---------------------|---------------------|
+| OROPEZA BALCAZAR DANIELA NICOLE  | 100%  |
+| ROMERO CORI JUDITH MARISOL | 100% |
 
 # Descripción
 ### texto
