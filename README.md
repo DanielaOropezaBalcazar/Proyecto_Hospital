@@ -14,6 +14,7 @@
 ###   - c2
 
 # Base de Datos
+## Diagrama Relacional (DBeaver)
 ![BD hospital - Diagrama Relacional](https://github.com/user-attachments/assets/6896b241-8f31-454d-8b25-f0b4f1c2bb38)
 
 
