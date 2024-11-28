@@ -5,13 +5,10 @@ import java.util.Date;
 public class receta {
     private int codigo;
     private Date fecha;
-    private int duracion;
 
-
-    public receta(int codigo, Date fecha, int duracion) {
+    public receta(int codigo, Date fecha) {
         this.codigo = codigo;
         this.fecha = fecha;
-        this.duracion = duracion;
     }
 
   
@@ -31,11 +28,4 @@ public class receta {
         this.fecha = fecha;
     }
 
-    public int getDuracion() {
-        return duracion;
-    }
-
-    public void setDuracion(int duracion) {
-        this.duracion = duracion;
-    }
 }
