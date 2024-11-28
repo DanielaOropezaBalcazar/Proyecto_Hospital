@@ -13,7 +13,18 @@ public class paciente {
     private boolean genero;
 
     
-    public paciente(int codigo, String nombre, String apellido, LocalDate fechaNacimiento, String tipoSangre, boolean genero) {
+    public paciente(int codigo, int ci, String nombre, String apellido, String tipoSangre, boolean genero) {
+		super();
+		this.codigo = codigo;
+		this.ci = ci;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.tipoSangre = tipoSangre;
+		this.genero = genero;
+	}
+
+
+	public paciente(int codigo, String nombre, String apellido, LocalDate fechaNacimiento, String tipoSangre, boolean genero) {
         this.codigo = codigo;
         this.ci = ci;
         this.nombre = nombre;

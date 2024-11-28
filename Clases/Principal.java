@@ -7,11 +7,16 @@ import java.util.Scanner;
 
 public class Principal {
     public static void main(String[] args) {
-    	crudPaciente();
-    	//crudEmpleado();
+    	//crudPaciente();
+    	//crudDoctor();
+    	//crudEnfermero();
     	//crudConsulta();
     	//crudReceta();
-    	//crudMedicacion();
+    	//crudMedicacion(); // OPCIONAL
+
+    	paciente p1 =new paciente(9, 1233, "Pedro", "Perez", "B", true);
+    	pacienteBD db = new pacienteBD(); 
+        db.agregarPaciente(p1);
     }
     
     public static void crudPaciente() {
@@ -28,13 +33,13 @@ public class Principal {
             System.out.println("6. Salir");
             System.out.print("Selecciona una opcion: ");
             int opcion = scanner.nextInt();
-            scanner.nextLine(); // Limpiar el buffer
+            scanner.nextLine();
             
             switch (opcion) {
                 case 1: // Agregar paciente
                     System.out.print("CI: ");
-                    int ci = scanner.nextInt();
-                    scanner.nextLine(); // Limpiar el buffer
+                    //int ci = scanner.nextInt();
+                    int ci = Integer.parseInt(scanner.nextLine());
                     System.out.print("Nombre: ");
                     String nombre = scanner.nextLine();
                     System.out.print("Apellido: ");
@@ -76,7 +81,7 @@ public class Principal {
                 case 4: // Editar paciente
                     System.out.print("Ingresa el codigo del paciente a editar: ");
                     int codigoEditar = scanner.nextInt();
-                    scanner.nextLine(); // Limpiar el buffer
+                    scanner.nextLine();
                     
                     System.out.print("Nuevo CI: ");
                     int nuevoCi = scanner.nextInt();
