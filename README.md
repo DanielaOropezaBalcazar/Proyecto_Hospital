@@ -7,11 +7,12 @@
 | ROMERO CORI JUDITH MARISOL | 100% |
 
 # Descripción
-### texto
+### El proyecto "Sistema de Gestión de Pacientes, Empleados y Consultas para un Hospital" tiene como objetivo principal crear una herramienta que facilite el manejo de información dentro de un hospital. Este sistema ayuda a registrar, guardar y organizar datos de pacientes, empleados y consultas de manera eficiente, rápida y segura.
 
 # Características
-###   - c1
-###   - c2
+###   - El sistema tiene un menú con íconos personalizados obtenidos de Flaticon, haciendo la interfaz fácil de usar. Sus principales funciones incluyen registrar y consultar información de pacientes, empleados y consultas, resolviendo problemas comunes en la organización y acceso a los datos.
+###   - El objetivo del sistema es mejorar la administración del hospital, reduciendo tiempos de espera y garantizando que la información sea precisa, brindando un mejor servicio tanto a los pacientes como al personal.
+
 
 # Base de Datos
 ### Diagrama Relacional (DBeaver)
