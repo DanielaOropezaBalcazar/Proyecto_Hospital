@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,6 +21,8 @@ import javax.swing.SwingConstants;
 import CRUDs.*;
 import Clases.*;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class pacienteV extends JFrame {
 
@@ -68,6 +71,7 @@ public class pacienteV extends JFrame {
      * @param ci 
      * @return 
      */
+    
     public pacienteV() {
         setTitle("PACIENTES");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -81,6 +85,10 @@ public class pacienteV extends JFrame {
         contentPane.setLayout(null);
 
         JButton btnAgregarPaciente = new JButton("Agregar Nuevo Paciente");
+        btnAgregarPaciente.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         btnAgregarPaciente.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
@@ -95,7 +103,7 @@ public class pacienteV extends JFrame {
                 txAviso.setText("Se ha Agregado un paciente nuevo");
         	}
         });
-        btnAgregarPaciente.setBounds(54, 70, 176, 21);
+        btnAgregarPaciente.setBounds(569, 39, 173, 41);
         btnAgregarPaciente.setBackground(new Color(153, 255, 153)); // Verde claro
         contentPane.add(btnAgregarPaciente);
 
@@ -115,7 +123,7 @@ public class pacienteV extends JFrame {
                 txAviso.setText("Se han Editado los datos");
         	}
         });
-        btnEditar.setBounds(42, 110, 85, 21);
+        btnEditar.setBounds(35, 67, 85, 21);
         btnEditar.setBackground(new Color(153, 255, 153));
         contentPane.add(btnEditar);
 
@@ -128,18 +136,22 @@ public class pacienteV extends JFrame {
                 txAviso.setText("Se han Eliminado los datos");    		
         	}
         });
-        btnEliminar.setBounds(42, 150, 85, 21);
+        btnEliminar.setBounds(35, 107, 85, 21);
         btnEliminar.setBackground(new Color(153, 255, 153));
         contentPane.add(btnEliminar);
 
         JButton btnMostrarTodos = new JButton("Mostrar todos");
-        btnMostrarTodos.setBounds(580, 39, 150, 30);
+        btnMostrarTodos.setBounds(42, 206, 150, 30);
         btnMostrarTodos.setBackground(new Color(153, 255, 153));
+        btnMostrarTodos.addActionListener(e -> {
+            List<paciente> lista = new pacienteBD().obtenerTodos();
+            mostrarDatosEnTabla(lista);
+        });
         contentPane.add(btnMostrarTodos);
 
         // TextField para buscar
         txBuscar = new JTextField();
-        txBuscar.setBounds(137, 193, 104, 19);
+        txBuscar.setBounds(130, 150, 104, 19);
         contentPane.add(txBuscar);
         txBuscar.setColumns(10);
 
@@ -163,7 +175,7 @@ public class pacienteV extends JFrame {
         		
         	}
         });
-        btnBuscar.setBounds(42, 190, 85, 21);
+        btnBuscar.setBounds(35, 147, 85, 21);
         btnBuscar.setBackground(new Color(153, 255, 153));
         contentPane.add(btnBuscar);
 
@@ -215,14 +227,16 @@ public class pacienteV extends JFrame {
         contentPane.add(txCi);
 
         // Tabla para mostrar pacientes
+        // llamar a "pbtenerDatos" y a "mostrarDatos"
         modeloTabla = new DefaultTableModel(
-                new Object[][] {},
-                new String[] { "Nombre", "Apellido", "Fecha de Nacimiento", "CI", "Género" }
+            new Object[][] {},
+            new String[] { "Nombre", "Apellido", "Fecha de Nacimiento", "CI", "Genero" }
         );
         tablePacientes = new JTable(modeloTabla);
         JScrollPane scrollPane = new JScrollPane(tablePacientes);
         scrollPane.setBounds(42, 265, 700, 250);
         contentPane.add(scrollPane);
+        mostrarDatosEnTabla(new pacienteBD().obtenerTodos());
         
         txSangre = new JTextField();
         txSangre.setColumns(10);
@@ -240,12 +254,12 @@ public class pacienteV extends JFrame {
         
         txEliminar = new JTextField();
         txEliminar.setColumns(10);
-        txEliminar.setBounds(137, 151, 104, 19);
+        txEliminar.setBounds(130, 108, 104, 19);
         contentPane.add(txEliminar);
         
         txEditar = new JTextField();
         txEditar.setColumns(10);
-        txEditar.setBounds(137, 111, 104, 19);
+        txEditar.setBounds(130, 68, 104, 19);
         contentPane.add(txEditar);
         
         JLabel lblAviso = new JLabel("AVISO");
@@ -256,7 +270,7 @@ public class pacienteV extends JFrame {
         txAviso.setHorizontalAlignment(SwingConstants.CENTER);
         txAviso.setEditable(false);
         txAviso.setColumns(10);
-        txAviso.setBounds(328, 207, 269, 30);
+        txAviso.setBounds(306, 207, 276, 30);
         contentPane.add(txAviso);
         
         JButton btnLimpiar = new JButton("Limpiar campos");
@@ -272,10 +286,30 @@ public class pacienteV extends JFrame {
         	}
         });
         btnLimpiar.setBackground(new Color(153, 255, 153));
-        btnLimpiar.setBounds(580, 88, 150, 30);
+        btnLimpiar.setBounds(592, 206, 150, 30);
         contentPane.add(btnLimpiar);
+        
+        JLabel lblFormatoFecha = new JLabel("(aaaa-mm-dd)");
+        lblFormatoFecha.setBounds(543, 114, 85, 13);
+        contentPane.add(lblFormatoFecha);
+        
+        JLabel lblFormatoGenero = new JLabel("(M: \"true\"; F: \"false\")");
+        lblFormatoGenero.setBounds(543, 169, 135, 13);
+        contentPane.add(lblFormatoGenero);
 
 
+    }
+    public void mostrarDatosEnTabla(List<paciente> listaPacientes) {
+        modeloTabla.setRowCount(0); // Limpiar tabla antes de agregar nuevos datos
+        for (paciente p : listaPacientes) {
+            modeloTabla.addRow(new Object[] {
+                p.getNombre(),
+                p.getApellido(),
+                p.getFechaNacimiento(),
+                p.getCi(),
+                p.isGenero() ? "Masculino" : "Femenino"
+            });
+        }
     }
 }
 

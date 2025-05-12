@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class pacienteBD {
+	
     private Connection conexion;
 
     public pacienteBD() {
@@ -104,6 +105,9 @@ public class pacienteBD {
         }
         return pacientes;
     }
+
+
+    
 
 
 }
