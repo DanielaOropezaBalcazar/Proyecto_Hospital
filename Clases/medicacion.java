@@ -8,9 +8,18 @@ public class medicacion {
     private String detalle;
     private int precio;
 
-  
+    
     public medicacion(int codigo, String nombre, String laboratorio, String detalle, int precio) {
-        this.codigo = codigo;
+		super();
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.laboratorio = laboratorio;
+		this.detalle = detalle;
+		this.precio = precio;
+	}
+
+
+	public medicacion(String nombre, String laboratorio, String detalle, int precio) {
         this.nombre = nombre;
         this.laboratorio = laboratorio;
         this.detalle = detalle;

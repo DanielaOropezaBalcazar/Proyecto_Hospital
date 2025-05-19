@@ -1,5 +1,6 @@
 package Clases;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class empleado {
@@ -8,13 +9,13 @@ public class empleado {
     private int ci;
     private String nombre;
     private String apellido;
-    private Date fechaNacimiento;
-    private Date fechaIngreso;
+    private LocalDate fechaNacimiento;
+    private LocalDate fechaIngreso;
     private String cargo;
     private int salario;
 
     // Constructor
-    public empleado(int codigo, int ci, String nombre, String apellido, Date fechaNacimiento, Date fechaIngreso, 
+    public empleado(int codigo, int ci, String nombre, String apellido, LocalDate fechaNacimiento, LocalDate fechaIngreso, 
                     String cargo, int salario) {
         this.codigo = codigo;
         this.ci = ci;
@@ -25,8 +26,20 @@ public class empleado {
         this.cargo = cargo;
         this.salario = salario;
     }
+    
 
-    // Getters y Setters
+    public empleado(int ci, String nombre, String apellido, LocalDate fechaNacimiento, LocalDate fechaIngreso, String cargo, int salario) {
+		super();
+		this.ci = ci;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.fechaNacimiento = fechaNacimiento;
+		this.fechaIngreso = fechaIngreso;
+		this.cargo = cargo;
+		this.salario = salario;
+	}
+
+	// Getters y Setters
     public int getCodigo() {
         return codigo;
     }
@@ -59,19 +72,19 @@ public class empleado {
         this.apellido = apellido;
     }
 
-    public Date getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Date getFechaIngreso() {
+    public LocalDate getFechaIngreso() {
         return fechaIngreso;
     }
 
-    public void setFechaIngreso(Date fechaIngreso) {
+    public void setFechaIngreso(LocalDate fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
 

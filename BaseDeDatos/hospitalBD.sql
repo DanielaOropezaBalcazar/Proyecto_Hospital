@@ -152,7 +152,7 @@ CREATE TABLE `paciente` (
   `apellido` varchar(50) DEFAULT NULL,
   `fecha_nacimiento` date DEFAULT NULL,
   `tipo_sangre` varchar(10) DEFAULT NULL,
-  `genero` varchar(10) DEFAULT NULL
+  `genero` boolean DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
