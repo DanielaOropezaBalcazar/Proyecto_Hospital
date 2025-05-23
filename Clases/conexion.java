@@ -7,20 +7,23 @@ import java.sql.SQLException;
 public class conexion {
 
     private static final String URL = "jdbc:mysql://localhost:3306/hospital";
-    private static final String USER = "root";
-    private static final String PASSWORD = "";
+    private static final String USUARIO = "root";
+    private static final String CONTRASENA = ""; 
 
     public static Connection conectar() {
-        Connection connection = null;
+        Connection conn = null;
         try {
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println("Conexión correcta.");
-        } catch (SQLException e) {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection(URL, USUARIO, CONTRASENA);
+            System.out.println("Conexión establecida con la base de datos.");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error: no se encontró el driver JDBC.");
             e.printStackTrace();
-            System.out.println("Error al conectar.");
+        } catch (SQLException e) {
+            System.out.println("Error al conectar con la base de datos.");
+            e.printStackTrace();
         }
-        return connection;
+        return conn;
     }
 }
-
 
