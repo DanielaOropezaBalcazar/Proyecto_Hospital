@@ -323,3 +323,14 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+USE hospital2;
+
+CREATE TABLE atencion (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nivel_urgencia ENUM('crítico', 'urgente', 'semiurgente', 'no urgente'),
+    consultaCodigo INT,
+    FOREIGN KEY (consultaCodigo) REFERENCES consulta(codigo)
+);
