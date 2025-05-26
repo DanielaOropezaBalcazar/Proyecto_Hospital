@@ -150,7 +150,8 @@ public class pacienteV extends JFrame {
 
         // TextField para buscar
         txBuscar = new JTextField();
-        txBuscar.setBounds(130, 150, 104, 19);
+        txBuscar.setToolTipText("");
+        txBuscar.setBounds(169, 150, 65, 19);
         contentPane.add(txBuscar);
         txBuscar.setColumns(10);
 
@@ -252,12 +253,12 @@ public class pacienteV extends JFrame {
         
         txEliminar = new JTextField();
         txEliminar.setColumns(10);
-        txEliminar.setBounds(130, 108, 104, 19);
+        txEliminar.setBounds(169, 108, 65, 19);
         contentPane.add(txEliminar);
         
         txEditar = new JTextField();
         txEditar.setColumns(10);
-        txEditar.setBounds(130, 68, 104, 19);
+        txEditar.setBounds(169, 68, 65, 19);
         contentPane.add(txEditar);
         
         JLabel lblAviso = new JLabel("AVISO");
@@ -304,6 +305,18 @@ public class pacienteV extends JFrame {
         grupoGenero = new ButtonGroup();
         grupoGenero.add(rdbtnMasculino);
         grupoGenero.add(rdbtnFemenino);
+        
+        JLabel lblCi_1 = new JLabel("CI:");
+        lblCi_1.setBounds(130, 153, 69, 13);
+        contentPane.add(lblCi_1);
+        
+        JLabel lblCodigo = new JLabel("Cod.:");
+        lblCodigo.setBounds(130, 111, 69, 13);
+        contentPane.add(lblCodigo);
+        
+        JLabel lblCodigo_1 = new JLabel("Cod.:");
+        lblCodigo_1.setBounds(130, 71, 69, 13);
+        contentPane.add(lblCodigo_1);
 
     }
     
@@ -320,5 +333,4 @@ public class pacienteV extends JFrame {
             });
         }
     }
-
 }

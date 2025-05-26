@@ -1,4 +1,4 @@
-package hospital;
+package Clases;
 
 public class atencion {
     private String detalle;

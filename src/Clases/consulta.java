@@ -1,7 +1,6 @@
 package Clases;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class consulta {
 
@@ -11,17 +10,18 @@ public class consulta {
     private int precio;
     private int doctorCodigo;
     private int pacienteCodigo;
+    //private String paciente;
+    private String nivelUrgencia;  
     
-	public consulta(int codigo, LocalDate fecha, String detalle, int precio, int doctorCodigo, int historialCodigo) {
+	public consulta(int codigo, LocalDate fecha, String detalle, int precio, int doctorCodigo, int pacienteCodigo) {
 		super();
 		this.codigo = codigo;
 		this.fecha = fecha;
 		this.detalle = detalle;
 		this.precio = precio;
 		this.doctorCodigo = doctorCodigo;
-		this.pacienteCodigo = historialCodigo;
+		this.pacienteCodigo = pacienteCodigo;
 	}
-
 
 	public consulta(LocalDate fecha, String detalle, int precio, int doctorCodigo, int pacienteCodigo) {
 		super();
@@ -32,6 +32,12 @@ public class consulta {
 		this.pacienteCodigo = pacienteCodigo;
 	}
 
+	public consulta(String detalle, int pacienteCodigo, String nivelUrgencia) {
+		super();
+		this.detalle = detalle;
+		this.pacienteCodigo = pacienteCodigo;
+		this.nivelUrgencia = nivelUrgencia;
+	}
 
 	public int getCodigo() {
 		return codigo;
@@ -69,6 +75,16 @@ public class consulta {
 	public void setPacienteCodigo(int pacienteCodigo) {
 		this.pacienteCodigo = pacienteCodigo;
 	}
+
+//
+//
+//	public String getPaciente() {
+//		return paciente;
+//	}
+//
+//	public void setPaciente(String paciente) {
+//		this.paciente = paciente;
+//	}
     
     
 	

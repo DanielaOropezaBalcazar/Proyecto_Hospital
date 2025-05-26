@@ -57,10 +57,10 @@ public class pacienteBD {
     }
 
     // Eliminar un paciente por su código
-    public void eliminarPaciente(int ci) {
-        String sql = "DELETE FROM paciente WHERE ci = ?";
+    public void eliminarPaciente(int codigo) {
+        String sql = "DELETE FROM paciente WHERE codigo = ?";
         try (PreparedStatement parametro = conexion.prepareStatement(sql)) {
-            parametro.setInt(1, ci);
+            parametro.setInt(1, codigo);
             parametro.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

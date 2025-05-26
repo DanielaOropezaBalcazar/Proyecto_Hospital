@@ -59,7 +59,7 @@ public class menu_hospital extends JFrame {
         contentPane.add(btnVerPacientes);
 
         // Botón para Ver Doctores
-        JButton btnVerDoctores = new JButton("Ver Empleados");
+        JButton btnVerDoctores = new JButton("Ver Doctores");
         btnVerDoctores.setBounds(303, 159, 158, 46);
         btnVerDoctores.addActionListener(e -> {
             // Abrir la interfaz Doctor
@@ -79,14 +79,14 @@ public class menu_hospital extends JFrame {
         contentPane.add(btnVerCunsultas);
 
         // Botón para Ver Recetas
-        JButton btnVerCitas = new JButton("Atencion al Cliente");
-        btnVerCitas.setBounds(105, 355, 152, 46);
-        btnVerCitas.addActionListener(e -> {
+        JButton btnVerAtencion = new JButton("Atencion al Cliente");
+        btnVerAtencion.setBounds(105, 355, 152, 46);
+        btnVerAtencion.addActionListener(e -> {
             // Abrir la interfaz Receta
-            recetaV receta = new recetaV(); 
-            receta.setVisible(true);
+            atencionV atencion = new atencionV(); 
+            atencion.setVisible(true);
         });
-        contentPane.add(btnVerCitas);
+        contentPane.add(btnVerAtencion);
 
         // Botón para Ver Medicación
         JButton btnVerMedicacion = new JButton("Consultas por Fecha");
