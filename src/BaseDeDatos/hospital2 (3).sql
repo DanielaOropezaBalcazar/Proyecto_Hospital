@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-05-2025 a las 19:23:05
+-- Tiempo de generación: 26-05-2025 a las 18:50:09
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,6 +20,33 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `hospital2`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `atencion`
+--
+
+CREATE TABLE `atencion` (
+  `codigo` int(11) NOT NULL,
+  `nivel_urgencia` enum('crítico','urgente','semiurgente','no urgente') DEFAULT NULL,
+  `consulta_codigo` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `atencion`
+--
+
+INSERT INTO `atencion` (`codigo`, `nivel_urgencia`, `consulta_codigo`) VALUES
+(1, 'urgente', 1),
+(2, 'no urgente', 2),
+(3, 'semiurgente', 3),
+(4, 'crítico', 4),
+(5, 'urgente', 5),
+(6, 'no urgente', 6),
+(7, 'semiurgente', 7),
+(8, 'crítico', 8),
+(9, 'urgente', 9);
 
 -- --------------------------------------------------------
 
@@ -60,7 +87,16 @@ INSERT INTO `consulta` (`codigo`, `detalle`, `fecha`, `precio`, `doctor_codigo`,
 (17, 'Chequeo visual', '2025-03-20', 370, 7, 9),
 (18, 'Consulta digestiva', '2025-03-25', 420, 8, 9),
 (19, 'Evaluación cardiológica', '2025-03-28', 500, 1, 4),
-(20, 'Consulta general', '2025-04-01', 290, 2, 6);
+(20, 'Consulta general', '2025-04-01', 290, 2, 6),
+(23, 'Consulta general', '2025-05-01', 150, 1, 1),
+(24, 'Control de presión arterial', '2025-05-02', 120, 1, 2),
+(25, 'Consulta pediátrica', '2025-05-03', 130, 1, 3),
+(26, 'Chequeo anual', '2025-05-04', 160, 1, 4),
+(27, 'Consulta de diabetes', '2025-05-05', 180, 1, 5),
+(28, 'Consulta cardiológica', '2025-05-06', 200, 1, 6),
+(29, 'Consulta de alergias', '2025-05-07', 140, 1, 7),
+(30, 'Consulta dermatológica', '2025-05-08', 170, 1, 8),
+(31, 'Consulta de neurología', '2025-05-09', 210, 1, 9);
 
 -- --------------------------------------------------------
 
@@ -220,12 +256,19 @@ CREATE TABLE `receta_medicacion` (
 --
 
 --
+-- Indices de la tabla `atencion`
+--
+ALTER TABLE `atencion`
+  ADD PRIMARY KEY (`codigo`),
+  ADD KEY `consulta_codigo` (`consulta_codigo`);
+
+--
 -- Indices de la tabla `consulta`
 --
 ALTER TABLE `consulta`
   ADD PRIMARY KEY (`codigo`),
   ADD KEY `consulta_doctor` (`doctor_codigo`),
-  ADD KEY `consulta_paciente` (`paciente_codigo`);
+  ADD KEY `paciente_codigo` (`paciente_codigo`) USING BTREE;
 
 --
 -- Indices de la tabla `doctor`
@@ -282,8 +325,72 @@ ALTER TABLE `receta_medicacion`
   ADD KEY `receta_medicacion_medicacion` (`medicacion_codigo`);
 
 --
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `atencion`
+--
+ALTER TABLE `atencion`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `consulta`
+--
+ALTER TABLE `consulta`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT de la tabla `doctor`
+--
+ALTER TABLE `doctor`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT de la tabla `habitacion`
+--
+ALTER TABLE `habitacion`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `internacion`
+--
+ALTER TABLE `internacion`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `laboratorio`
+--
+ALTER TABLE `laboratorio`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `medicacion`
+--
+ALTER TABLE `medicacion`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `paciente`
+--
+ALTER TABLE `paciente`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de la tabla `receta`
+--
+ALTER TABLE `receta`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `atencion`
+--
+ALTER TABLE `atencion`
+  ADD CONSTRAINT `atencion_ibfk_1` FOREIGN KEY (`consulta_codigo`) REFERENCES `consulta` (`codigo`);
 
 --
 -- Filtros para la tabla `consulta`
