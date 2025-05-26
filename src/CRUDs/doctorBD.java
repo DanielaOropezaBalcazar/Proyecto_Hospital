@@ -19,7 +19,7 @@ public class doctorBD {
 
     // Crear un nuevo doctor
     public void agregarDoctor(doctor doctor) {
-        String sql = "INSERT INTO doctor (ci, nombre, apellido, fecha_nacimiento, fecha_ingreso, cargo, salario) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO doctor (ci, nombre, apellido, fecha_nacimiento, fecha_ingreso, cargo, salario, especialidad) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement parametro = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             parametro.setInt(1, doctor.getCi());
             parametro.setString(2, doctor.getNombre());
@@ -28,6 +28,7 @@ public class doctorBD {
             parametro.setDate(5, Date.valueOf(doctor.getFechaIngreso()));
             parametro.setString(6, doctor.getCargo());
             parametro.setInt(7, doctor.getSalario());
+            parametro.setString(8, doctor.getEspecialidad());
             parametro.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -36,7 +37,7 @@ public class doctorBD {
 
     // Editar un doctor existente
     public void editarDoctor(doctor doctor, int codigo) {
-        String sql = "UPDATE doctor SET ci = ?, nombre = ?, apellido = ?, fecha_nacimiento = ?, fecha_ingreso = ?, cargo = ?, salario = ? WHERE codigo = ?";
+        String sql = "UPDATE doctor SET ci = ?, nombre = ?, apellido = ?, fecha_nacimiento = ?, fecha_ingreso = ?, cargo = ?, salario = ?, especialidad = ? WHERE codigo = ?";
         try (PreparedStatement parametro = conexion.prepareStatement(sql)) {
             parametro.setInt(1, doctor.getCi());
             parametro.setString(2, doctor.getNombre());
@@ -45,7 +46,8 @@ public class doctorBD {
             parametro.setDate(5, Date.valueOf(doctor.getFechaIngreso()));
             parametro.setString(6, doctor.getCargo());
             parametro.setInt(7, doctor.getSalario());
-            parametro.setInt(8, codigo);
+            parametro.setString(8, doctor.getEspecialidad());
+            parametro.setInt(9, codigo);
             parametro.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
