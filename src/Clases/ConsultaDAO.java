@@ -10,7 +10,7 @@ public class ConsultaDAO {
     public static HashMap<Integer, doctor> obtenerDoctoresPorFecha(String fecha) {
     	HashMap<Integer, doctor> doctores = new HashMap<>();
 
-        String sql = "SELECT DISTINCT p.codigo, p.nombre " +
+        String sql = "SELECT DISTINCT p.ci, p.apellido " +
                      "FROM consulta c " +
                      "JOIN doctor p ON c.doctor_codigo = p.codigo " +
                      "WHERE c.fecha = ?";
@@ -22,11 +22,11 @@ public class ConsultaDAO {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                int codigo = rs.getInt("codigo");
-                String nombre = rs.getString("nombre");
+                int ci = rs.getInt("ci");
+                String apellido = rs.getString("apellido");
 
-                doctor doc = new doctor(codigo, nombre);
-                doctores.put(codigo, doc);
+                doctor doc = new doctor(ci, apellido);
+                doctores.put(ci, doc);
             }
 
         } catch (Exception e) {

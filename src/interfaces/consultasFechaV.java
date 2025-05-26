@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,25 +20,25 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import CRUDs.consultaBD;
-import CRUDs.medicacionBD;
-import Clases.medicacion;
+import Clases.ConsultaDAO;
+import Clases.doctor;
 
 public class consultasFechaV extends JFrame {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
-	consultaBD db = new consultaBD(); 
-    
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
+    consultaBD db = new consultaBD();
+
     private JPanel contentPane;
     private JTable tableMedicaciones;
     private DefaultTableModel modeloTabla;
-    private JTextField txCodigo, txNombre, txLaboratorio, txDetalle, txPrecio, txEditar;
-    private JTextField txEliminar;
-    private JTextField txBuscar;
+    private JTextField txAnio;
     private JTextField txAviso;
+    private JTextField txMes;
+    private JTextField txDia;
 
     /**
      * Launch the application.
@@ -44,7 +46,7 @@ public class consultasFechaV extends JFrame {
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             try {
-            	consultasFechaV frame = new consultasFechaV();
+                consultasFechaV frame = new consultasFechaV();
                 frame.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -56,189 +58,129 @@ public class consultasFechaV extends JFrame {
      * Create the frame.
      */
     public consultasFechaV() {
-        setTitle("Gestión de Medicaciones");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Cambiado a DISPOSE_ON_CLOSE
-        setBounds(100, 100, 800, 600);
-        
+        setTitle("Consultas por Fecha");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setBounds(100, 100, 443, 446);
+
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        contentPane.setBackground(new Color(144, 238, 144)); // Color verde claro para el fondo del panel
+        contentPane.setBackground(new Color(204, 255, 204)); // Verde claro
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JLabel lblTitulo = new JLabel("Gestión de Medicaciones");
+        JLabel lblTitulo = new JLabel("Gestión de Consultas por Fechas");
         lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 16));
-        lblTitulo.setBounds(303, 11, 236, 20);
+        lblTitulo.setBounds(86, 10, 300, 20);
         contentPane.add(lblTitulo);
 
-        JLabel lblCodigo = new JLabel("Código:");
-        lblCodigo.setBounds(85, 51, 80, 20);
-        contentPane.add(lblCodigo);
+        JLabel lblFecha = new JLabel("Ingrese la Fecha:");
+        lblFecha.setBounds(39, 58, 149, 20);
+        contentPane.add(lblFecha);
 
-        JLabel lblNombre = new JLabel("Nombre:");
-        lblNombre.setBounds(85, 81, 80, 20);
-        contentPane.add(lblNombre);
-
-        JLabel lblLaboratorio = new JLabel("Laboratorio:");
-        lblLaboratorio.setBounds(85, 111, 100, 20);
-        contentPane.add(lblLaboratorio);
-
-        JLabel lblDetalle = new JLabel("Detalle:");
-        lblDetalle.setBounds(85, 141, 80, 20);
-        contentPane.add(lblDetalle);
-
-        JLabel lblPrecio = new JLabel("Precio:");
-        lblPrecio.setBounds(85, 170, 100, 20);
-        contentPane.add(lblPrecio);
-
-        txCodigo = new JTextField();
-        txCodigo.setEditable(false);
-        txCodigo.setBounds(200, 50, 200, 20);
-        txCodigo.setBackground(new Color(255, 255, 255)); // Fondo verde claro para el campo
-        contentPane.add(txCodigo);
-
-        txNombre = new JTextField();
-        txNombre.setBounds(200, 80, 200, 20);
-        txNombre.setBackground(new Color(255, 255, 255)); // Fondo verde claro para el campo
-        contentPane.add(txNombre);
-
-        txLaboratorio = new JTextField();
-        txLaboratorio.setBounds(200, 110, 200, 20);
-        txLaboratorio.setBackground(new Color(255, 255, 255)); // Fondo verde claro para el campo
-        contentPane.add(txLaboratorio);
-
-        txDetalle = new JTextField();
-        txDetalle.setBounds(200, 140, 200, 20);
-        txDetalle.setBackground(new Color(255, 255, 255)); // Fondo verde claro para el campo
-        contentPane.add(txDetalle);
-
-        txPrecio = new JTextField();
-        txPrecio.setBounds(200, 170, 200, 20);
-        txPrecio.setBackground(new Color(255, 255, 255)); // Fondo verde claro para el campo
-        contentPane.add(txPrecio);
-
-        JButton btnAgregar = new JButton("Agregar Nuevo");
-        btnAgregar.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent e) {
-				String nom = txNombre.getText();
-				String lab = txLaboratorio.getText();
-				String det = txDetalle.getText();
-				int pre = Integer.parseInt(txPrecio.getText());
-				medicacion nuevaMedicacion = new medicacion(nom, lab, det, pre);
-                db.agregarMedicacion(nuevaMedicacion);
-                txAviso.setText("Se ha Agregado una medicacion nueva");
-        	}
-        });
-        btnAgregar.setBounds(430, 48, 224, 25);
-        contentPane.add(btnAgregar);
-
-        JButton btnEditar = new JButton("Editar");
-        btnEditar.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent e) {
-        		int cod = Integer.parseInt(txEditar.getText()); 
-				String nom = txNombre.getText();
-				String lab = txLaboratorio.getText();
-				String det = txDetalle.getText();
-				int pre = Integer.parseInt(txPrecio.getText());
-				medicacion nuevaMedicacion = new medicacion(cod, nom, lab, det, pre);
-                db.editarMedicacion(nuevaMedicacion, cod);
-                txAviso.setText("Se han Editado los datos");
-        	}
-        });
-        btnEditar.setBounds(420, 90, 100, 25);
-        contentPane.add(btnEditar);
-
-        JButton btnEliminar = new JButton("Eliminar");
-        btnEliminar.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent e) {
-        		int cod = Integer.parseInt(txEliminar.getText());
-        		db.eliminarMedicacion(cod);
-                txAviso.setText("Se han Eliminado los datos");   
-        	}
-        });
-        btnEliminar.setBounds(420, 120, 100, 25);
-        contentPane.add(btnEliminar);
-
-        JButton btnMostrarTodos = new JButton("Mostrar Todos");
-        btnMostrarTodos.setBounds(462, 183, 157, 25);
-        contentPane.add(btnMostrarTodos);
-
-        txEditar = new JTextField();
-        txEditar.setBounds(542, 93, 120, 20);
-        txEditar.setBackground(new Color(255, 255, 255)); // Fondo verde claro para el campo
-        contentPane.add(txEditar);
+        txAnio = new JTextField();
+        txAnio.setEditable(true);
+        txAnio.setBounds(65, 129, 69, 20);
+        txAnio.setBackground(new Color(255, 255, 255)); // Fondo verde claro para el campo
+        contentPane.add(txAnio);
 
         JButton btnBuscar = new JButton("Buscar");
-        btnBuscar.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent e) {
-        		int cod = Integer.parseInt(txBuscar.getText());
-                medicacion encontrado = db.obtenerMedicacion(cod);
-                if (encontrado != null) {
-                	txCodigo.setText(encontrado.getCodigo()+"");
-            		txNombre.setText(encontrado.getNombre());
-            		txLaboratorio.setText(encontrado.getLaboratorio());
-            		txDetalle.setText(encontrado.getDetalle());
-                	txPrecio.setText(encontrado.getPrecio()+"");
-                	txAviso.setText("Se han Encontrado los datos de la medicacion");
-                } else {
-                	txAviso.setText("Datos no encontrados");
-                }
-        	}
-        });
-        btnBuscar.setBounds(420, 148, 100, 25);
+
+        btnBuscar.setBackground(new Color(153, 255, 153)); // Verde claro
+        btnBuscar.setBounds(152, 54, 84, 28);
         contentPane.add(btnBuscar);
 
-        // Tabla para mostrar medicaciones
+        // Tabla 
         modeloTabla = new DefaultTableModel(
                 new Object[][] {},
-                new String[]{"Código", "Nombre", "Descripción", "Cantidad", "Fecha Vencimiento"}
-        );
+                new String[] { "Nro. Identidad", "Apellido" });
         tableMedicaciones = new JTable(modeloTabla);
         JScrollPane scrollPane = new JScrollPane(tableMedicaciones);
-        scrollPane.setBounds(20, 253, 750, 267);
+        scrollPane.setBounds(39, 220, 347, 153);
         contentPane.add(scrollPane);
-        
-        txEliminar = new JTextField();
-        txEliminar.setBackground(Color.WHITE);
-        txEliminar.setBounds(542, 123, 120, 20);
-        contentPane.add(txEliminar);
-        
-        txBuscar = new JTextField();
-        txBuscar.setBackground(Color.WHITE);
-        txBuscar.setBounds(542, 151, 120, 20);
-        contentPane.add(txBuscar);
-        
+
         JLabel lblAviso = new JLabel("AVISO");
-        lblAviso.setBounds(58, 214, 80, 20);
+        lblAviso.setBounds(39, 174, 80, 20);
         contentPane.add(lblAviso);
-        
+
+        txAviso = new JTextField();
+        txAviso.setHorizontalAlignment(SwingConstants.CENTER);
+        txAviso.setEditable(false);
+        txAviso.setBounds(108, 171, 273, 28);
+        contentPane.add(txAviso);
+        txAviso.setColumns(10);
+
+        JLabel lblAnio = new JLabel("Año:");
+        lblAnio.setBounds(70, 99, 80, 20);
+        contentPane.add(lblAnio);
+
+        JLabel lblMes = new JLabel("Mes:");
+        lblMes.setBounds(168, 98, 80, 20);
+        contentPane.add(lblMes);
+
+        txMes = new JTextField();
+        txMes.setEditable(true);
+        txMes.setBackground(Color.WHITE);
+        txMes.setBounds(167, 129, 69, 20);
+        contentPane.add(txMes);
+
+        JLabel lblDia = new JLabel("Dia:");
+        lblDia.setBounds(268, 99, 80, 20);
+        contentPane.add(lblDia);
+
+        txDia = new JTextField();
+        txDia.setEditable(true);
+        txDia.setBackground(Color.WHITE);
+        txDia.setBounds(267, 130, 69, 20);
+        contentPane.add(txDia);
+
         JButton btnLimpiar = new JButton("Limpiar Campos");
         btnLimpiar.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
-            	txCodigo.setText("");
-        		txNombre.setText("");
-        		txLaboratorio.setText("");
-        		txDetalle.setText("");
-            	txPrecio.setText("");
+        		txAnio.setText("");
+        		txMes.setText("");
+        		txDia.setText("");
         	}
         });
-        btnLimpiar.setBounds(462, 218, 157, 25);
+        btnLimpiar.setBackground(new Color(153, 255, 153)); // Verde claro
+        btnLimpiar.setBounds(246, 54, 140, 28);
         contentPane.add(btnLimpiar);
-        
-        txAviso = new JTextField();
-        txAviso.setHorizontalAlignment(SwingConstants.CENTER);
-        txAviso.setEditable(false);
-        txAviso.setBounds(127, 211, 273, 28);
-        contentPane.add(txAviso);
-        txAviso.setColumns(10);
 
+        btnBuscar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                String fecha = obtenerFechaDeCampos();
+
+                modeloTabla.setRowCount(0);
+
+                HashMap<Integer, doctor> doctores = ConsultaDAO.obtenerDoctoresPorFecha(fecha);
+                for (Map.Entry<Integer, doctor> entry : doctores.entrySet()) {
+                    modeloTabla.addRow(new Object[]{
+                        entry.getKey(),
+                        entry.getValue().getNombre()
+                    });
+                }
+                // Avisos
+                if (doctores.isEmpty()) {
+                    txAviso.setText("No hay doctores para la fecha " + fecha);
+                } else {
+                    txAviso.setText("Mostrando doctores para " + fecha);
+                }
+            }
+        });
     }
 
+    private String obtenerFechaDeCampos() {
+        String anio = txAnio.getText().trim();
+        String mes = txMes.getText().trim();
+        String dia = txDia.getText().trim();
+
+        if (mes.length() == 1)
+            mes = "0" + mes;
+        if (dia.length() == 1)
+            dia = "0" + dia;
+
+        String fecha = anio + "-" + mes + "-" + dia;
+        return fecha;
+    }
 }
-
-

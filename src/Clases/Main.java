@@ -25,7 +25,7 @@ public class Main {
         
         System.out.println("Doctores que atendieron el " + fecha + ":");
         for (Map.Entry<Integer, doctor>entry : doctores.entrySet()) {
-            System.out.println("Codigo: "+entry.getKey()+"  ->  Nombre: "+entry.getValue().getNombre());
+            System.out.println("Ci: "+entry.getKey()+"  ->  Apellido: "+entry.getValue().getNombre());
         }
         
     }

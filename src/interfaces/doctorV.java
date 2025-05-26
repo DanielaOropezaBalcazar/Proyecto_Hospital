@@ -283,8 +283,8 @@ public class doctorV extends JFrame {
         		txEspecialidad.setText("");
         	}
         });
-        btnLimpiar.setBounds(52, 121, 150, 30);
         btnLimpiar.setBackground(new Color(153, 255, 153)); // Verde claro
+        btnLimpiar.setBounds(52, 121, 150, 30);
         contentPane.add(btnLimpiar);
         
         JLabel lblSalario = new JLabel("Salario:");
